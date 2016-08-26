@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Jquery is included here and available for use -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- some basic styles for game setup -->
+    <style>
+      .viewport {
+        height: 500px;
+        width: 500px;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        display: none;
+      }
+      .row {
+        display: table-row;
+      }
+      .game-space {
+        border: 1px dotted gray;
+        width: 50px;
+        height: 50px;
+        display: table-cell;
+      }
+      .ruby {
+        background-image: url(ruby.png);
+        background-repeat: no-repeat;
+        background-size: 40px 25px;
+        background-position: 4px 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="start_game">Start Game</button>
+    <div class="viewport"></div>
+    <div class="form">
+      <!-- File picker will only work with modern browsers! -->
+      <input type="file" />
+    </div>
+  </body>
+</html>
+
+<script>
+//Render function is provided to draw the game board
+var render = function() {
+  $('.viewport').css('display', 'table');
+  var html = "";
+  for(var i=0; i<10; i++) {
+    html += "<div class='row'>";
+    for(var j=0; j<10; j++) {
+      html += "<div class='game-space' id="+i+""+j+">";
+      if(i === 0 && j === 0) {
+        html += "<img src='python.png' height=45 width=45>";
+      }
+      html += "</div>";
+    }
+    html += "</div>";
+  }
+  $('.viewport').html(html);
+}
+
+//Your code here. Good luck!
+var currentPos_X = 0;
+var currentPos_Y = 0;
+
+$( "#start_game" ).click(function() {
+  render();
+  $( "#start_game" ).attr( "disabled", "true" );
+  
+  var a = Math.floor((Math.random() * 9));
+  var b = Math.floor((Math.random() * 9));
+  var id = "#"+ a +''+ b;
+  $(id).addClass("ruby");
+});
+
+$( document ).on("keydown", function(e){ 
+  e.preventDefault();
+  console.log( "Handler for .keypress() called." ); 
+  var code = e.keyCode || e.which;
+ 
+  if(code == 37){ 
+    console.log("left");
+  }   
+ 
+  if(code == 38){
+    console.log("up");
+  } 
+
+  if(code == 39) {
+    console.log("right");
+    var combined = '#' + currentPos_Y + '' + currentPos_X + " img"; 
+    var newPos_X = currentPos_X + 1;
+    var newPos_Y = currentPos_Y;
+    
+    var move = '#' + newPos_Y + '' + newPos_X;
+    $(combined) .remove();
+    $( move ).append( "<img src='python.png' height=45 width=45>" );
+    currentPos_X = newPos_X;
+    currentPos_Y = newPos_Y;
+  }   
+
+  if(code == 40) {
+    console.log("down");
+    $( "#10" ).append( "<img src='python.png' height=45 width=45>" );
+  }
+});
+
+</script>
+
