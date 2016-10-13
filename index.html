@@ -83,11 +83,6 @@ $( document ).on("keydown", function(e){
     var newPos_X = currentPos_X - 1;
     var newPos_Y = currentPos_Y;
 
-    var move = '#' + newPos_Y + '' + newPos_X;
-    $(combined) .remove();
-    $(move).append("<img src='python.png' height=45 width=45>");
-    currentPos_X = newPos_X;
-    currentPos_Y = newPos_Y;
   }
 
   if (code === 38) {
@@ -96,11 +91,6 @@ $( document ).on("keydown", function(e){
     var newPos_X = currentPos_X ;
     var newPos_Y = currentPos_Y - 1;
 
-    var move = '#' + newPos_Y + '' + newPos_X;
-    $(combined) .remove();
-    $( move ).append("<img src='python.png' height=45 width=45>");
-    currentPos_X = newPos_X;
-    currentPos_Y = newPos_Y;
   }
 
   if(code === 39) {
@@ -109,11 +99,6 @@ $( document ).on("keydown", function(e){
     var newPos_X = currentPos_X + 1;
     var newPos_Y = currentPos_Y;
 
-    var move = '#' + newPos_Y + '' + newPos_X;
-    $(combined) .remove();
-    $( move ).append( "<img src='python.png' height=45 width=45>" );
-    currentPos_X = newPos_X;
-    currentPos_Y = newPos_Y;
   }
 
   if(code === 40) {
@@ -122,14 +107,26 @@ $( document ).on("keydown", function(e){
     var newPos_X = currentPos_X ;
     var newPos_Y = currentPos_Y + 1;
 
+  }
+
+  if (newPos_X >=0 && newPos_X<=9 && newPos_Y >=0 && newPos_Y<=9) {
+    var python_locator = '#' + currentPos_Y + '' + currentPos_X + " img";
     var move = '#' + newPos_Y + '' + newPos_X;
-    $(combined).remove();
+    $(python_locator).remove();
     $(move).append("<img src='python.png' height=45 width=45>");
     currentPos_X = newPos_X;
     currentPos_Y = newPos_Y;
-  }
-  //if currentPos_X-1;
 
+
+    //currentPos_X = newPos_X;
+    //currentPos_Y = newPos_Y;
+    //var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
+  }
+  //
+    //$(combined) .remove();
+    //$(move).append("<img src='python.png' height=45 width=45>");
+    //currentPos_X = newPos_X;
+    //currentPos_Y = newPos_Y;
 });
 
 </script>
