@@ -61,15 +61,18 @@ var render = function() {
 //Your code here. Good luck!
 var currentPos_X = 0;
 var currentPos_Y = 0;
+var ruby_X;
+var ruby_Y;
+var moves=0;
 
 $( "#start_game" ).click(function() {
   render();
   $( "#start_game" ).attr( "disabled", "true" );
 
-  var a = Math.floor((Math.random() * 9));
-  var b = Math.floor((Math.random() * 9));
-  var id = "#"+ a +''+ b;
-  $(id).addClass("ruby");
+  ruby_X = Math.floor((Math.random() * 9));
+  ruby_Y = Math.floor((Math.random() * 9));
+  var ruby_combined = "#"+ ruby_Y +''+ ruby_X;
+  $(ruby_combined).addClass("ruby");
 });
 
 $( document ).on("keydown", function(e){ 
@@ -122,6 +125,16 @@ $( document ).on("keydown", function(e){
     //currentPos_Y = newPos_Y;
     //var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
   }
+//debugger;
+  if (code===37 || code===38 || code===39 || code===40){
+    moves += 1;
+
+  }
+  if (ruby_Y===currentPos_Y && ruby_X===currentPos_X) {
+    //console.log("match");
+    console.log(moves);
+  }
+
   //
     //$(combined) .remove();
     //$(move).append("<img src='python.png' height=45 width=45>");
