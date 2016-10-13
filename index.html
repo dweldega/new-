@@ -74,10 +74,10 @@ $( "#start_game" ).click(function() {
 
 $( document ).on("keydown", function(e){ 
   e.preventDefault();
-  console.log( "Handler for .keypress() called." );
+  console.log("Handler for .keypress() called.");
   var code = e.keyCode || e.which;
 
-  if(code == 37){
+  if(code === 37){
     console.log("left");
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X - 1;
@@ -85,12 +85,12 @@ $( document ).on("keydown", function(e){
 
     var move = '#' + newPos_Y + '' + newPos_X;
     $(combined) .remove();
-    $( move ).append("<img src='python.png' height=45 width=45>");
+    $(move).append("<img src='python.png' height=45 width=45>");
     currentPos_X = newPos_X;
     currentPos_Y = newPos_Y;
   }
 
-  if(code == 38){
+  if (code === 38) {
     console.log("up");
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X ;
@@ -103,7 +103,7 @@ $( document ).on("keydown", function(e){
     currentPos_Y = newPos_Y;
   }
 
-  if(code == 39) {
+  if(code === 39) {
     console.log("right");
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X + 1;
@@ -116,18 +116,20 @@ $( document ).on("keydown", function(e){
     currentPos_Y = newPos_Y;
   }
 
-  if(code == 40) {
+  if(code === 40) {
     console.log("down");
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X ;
     var newPos_Y = currentPos_Y + 1;
 
     var move = '#' + newPos_Y + '' + newPos_X;
-    $(combined) .remove();
-    $( move ).append( "<img src='python.png' height=45 width=45>" );
+    $(combined).remove();
+    $(move).append("<img src='python.png' height=45 width=45>");
     currentPos_X = newPos_X;
     currentPos_Y = newPos_Y;
   }
+  //if currentPos_X-1;
+
 });
 
 </script>
