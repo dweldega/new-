@@ -41,6 +41,7 @@
 
 <script>
 //Render function is provided to draw the game board
+var showWinner = function(){alert("Congrats you finished the game in " + moves + " moves");}
 var render = function() {
   $('.viewport').css('display', 'table');
   var html = "";
@@ -101,7 +102,8 @@ $( document ).on("keydown", function(e){
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X + 1;
     var newPos_Y = currentPos_Y;
-
+    var newRuby_X = ruby_X + 1;
+    var newRuby_Y = ruby_Y;
   }
 
   if(code === 40) {
@@ -109,6 +111,9 @@ $( document ).on("keydown", function(e){
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X ;
     var newPos_Y = currentPos_Y + 1;
+    var newRuby_X = ruby_X;
+    var newRuby_Y = ruby_Y + 1;
+
 
   }
 
@@ -132,9 +137,8 @@ $( document ).on("keydown", function(e){
   }
   if (ruby_Y===currentPos_Y && ruby_X===currentPos_X) {
     //console.log("match");
-    console.log(moves);
+    setTimeout(showWinner, 1000);
   }
-
   //
     //$(combined) .remove();
     //$(move).append("<img src='python.png' height=45 width=45>");
