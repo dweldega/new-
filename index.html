@@ -41,6 +41,15 @@
 
 <script>
 //Render function is provided to draw the game board
+var isValidMove = function(y,x){
+    if (y >= 0 && y <= 9 && x >=0 && x <= 9 ) {
+        return (true);
+    }
+    else {
+        return (false);
+
+    }
+}
 var showWinner = function(){alert("Congrats you finished the game in " + moves + " moves");}
 var render = function() {
   $('.viewport').css('display', 'table');
@@ -86,6 +95,8 @@ $( document ).on("keydown", function(e){
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X - 1;
     var newPos_Y = currentPos_Y;
+    var newRuby_X = ruby_X - 1;
+    var newRuby_Y = ruby_Y;
 
   }
 
@@ -94,6 +105,9 @@ $( document ).on("keydown", function(e){
     var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
     var newPos_X = currentPos_X ;
     var newPos_Y = currentPos_Y - 1;
+    var newRuby_X = ruby_X;
+    var newRuby_Y = ruby_Y - 1;
+
 
   }
 
@@ -118,27 +132,66 @@ $( document ).on("keydown", function(e){
   }
 
   if (newPos_X >=0 && newPos_X<=9 && newPos_Y >=0 && newPos_Y<=9) {
-    var python_locator = '#' + currentPos_Y + '' + currentPos_X + " img";
-    var move = '#' + newPos_Y + '' + newPos_X;
-    $(python_locator).remove();
-    $(move).append("<img src='python.png' height=45 width=45>");
-    currentPos_X = newPos_X;
-    currentPos_Y = newPos_Y;
+      moves += 1;
 
 
-    //currentPos_X = newPos_X;
-    //currentPos_Y = newPos_Y;
-    //var combined = '#' + currentPos_Y + '' + currentPos_X + " img";
+      var python_locator = '#' + currentPos_Y + '' + currentPos_X + " img";
+      var move = '#' + newPos_Y + '' + newPos_X;
+      $(python_locator).remove();
+      $(move).append("<img src='python.png' height=45 width=45>");
+      currentPos_X = newPos_X;
+      currentPos_Y = newPos_Y;
+
+      if (ruby_Y === currentPos_Y && ruby_X === currentPos_X) {
+          //console.log("match");
+          setTimeout(showWinner, 1000);
+      }
+      else {
+          if (isValidMove(newRuby_Y, newRuby_X)) {
+              var ruby_Locator = '#' + ruby_Y + '' + ruby_X;
+              var ruby_Dest = '#' + newRuby_Y + '' + newRuby_X;
+              $(ruby_Locator).removeClass("ruby");
+              $(ruby_Dest).addClass("ruby");
+              ruby_Y = newRuby_Y;
+              ruby_X = newRuby_X;
+          }
+          else if (isValidMove(ruby_Y-1, ruby_X )){
+              var ruby_Locator = '#' + ruby_Y + '' + ruby_X;
+              var ruby_Dest = '#' + (ruby_Y-1) + '' + ruby_X;
+              $(ruby_Locator).removeClass("ruby");
+              $(ruby_Dest).addClass("ruby");
+              ruby_Y = ruby_Y-1;
+              ruby_X = ruby_X;
+          }
+          else if (isValidMove(ruby_Y, ruby_X-1 )){
+              var ruby_Locator = '#' + ruby_Y + '' + ruby_X;
+              var ruby_Dest = '#' + ruby_Y + '' + (ruby_X-1);
+              $(ruby_Locator).removeClass("ruby");
+              $(ruby_Dest).addClass("ruby");
+              ruby_Y = ruby_Y;
+              ruby_X = ruby_X-1;
+          }
+          else if (isValidMove(ruby_Y+1, ruby_X )){
+              var ruby_Locator = '#' + ruby_Y + '' + ruby_X;
+              var ruby_Dest = '#' + (ruby_Y+1) + '' + ruby_X;
+              $(ruby_Locator).removeClass("ruby");
+              $(ruby_Dest).addClass("ruby");
+              ruby_Y = ruby_Y+1;
+              ruby_X = ruby_X;
+          }
+          else if (isValidMove(ruby_Y, ruby_X+1 )){
+              var ruby_Locator = '#' + ruby_Y + '' + ruby_X;
+              var ruby_Dest = '#' + ruby_Y + '' + (ruby_X+1);
+              $(ruby_Locator).removeClass("ruby");
+              $(ruby_Dest).addClass("ruby");
+              ruby_Y = ruby_Y;
+              ruby_X = ruby_X+1;
+          }
+      }
   }
 //debugger;
-  if (code===37 || code===38 || code===39 || code===40){
-    moves += 1;
 
-  }
-  if (ruby_Y===currentPos_Y && ruby_X===currentPos_X) {
-    //console.log("match");
-    setTimeout(showWinner, 1000);
-  }
+
   //
     //$(combined) .remove();
     //$(move).append("<img src='python.png' height=45 width=45>");
